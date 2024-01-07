@@ -1,7 +1,9 @@
+import random
+
 option = {
-    'Rock': False,
-    'Paper': False,
-    'Scissors': False
+    'rock': False,
+    'paper': False,
+    'scissors': False
 }
 
 # Rock = False
@@ -9,7 +11,23 @@ option = {
 # Scissors = False
 
 while True:
-    input('Welcome to rock, paper, scissors game. Please hit "Return" to continue...')
+    userContinue = input('Welcome to rock, paper, scissors game. Please hit "Return" to continue...')
+    if userContinue == '':
+        break
+    else:
+        pass
 
-if 
 while True:
+    option = input('Please select an option... "Rock", "Paper" or "Scissors"...')
+    option = option.lower()
+    if option == 'rock' or option == 'r':
+        option['rock'][True]
+        break
+    elif option == 'paper' or option == 'p':
+        option['paper'][True]        
+        break
+    elif option == 'scissors' or option == 's':
+        option['scissors'][True]
+        break
+    
+    
