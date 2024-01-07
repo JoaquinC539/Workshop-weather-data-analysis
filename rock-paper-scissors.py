@@ -1,11 +1,9 @@
-from random import randint
+import random
 
-option = {
-    'rock': tuple(False,1),
-    'paper': False,
-    'scissors': False
-}
 
+rock = [False, 1]
+paper = [False, 2]
+scissors = [False, 3]
 
 
 # Rock = False
@@ -20,24 +18,19 @@ while True:
         pass
 
 while True:
-    
     option = input('Please select an option... "Rock", "Paper" or "Scissors"...')
     option = option.lower()
-    # Seleccionar que la maquina tome un numero
-    selection=randint(1,3)
-    print(selection)
-    options=["rock","paper","scissors"]
-    machine=options[selection]
-    print(machine)
-    
     if option == 'rock' or option == 'r':
-        option['rock'][True]
+        rock[0] = True
         break
     elif option == 'paper' or option == 'p':
-        option['paper'][True]        
+        paper[0] = True      
         break
     elif option == 'scissors' or option == 's':
-        option['scissors'][True]
+        scissors[0] = True
         break
-#hello
+    else:
+        print('please select a valid option...')
+
+#print(random.choice(option[])
     
