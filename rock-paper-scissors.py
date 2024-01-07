@@ -39,5 +39,5 @@ while True:
     elif option == 'scissors' or option == 's':
         option['scissors'][True]
         break
-    
+#hello
     
