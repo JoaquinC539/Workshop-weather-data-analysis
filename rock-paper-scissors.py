@@ -1,17 +1,9 @@
-########### Algoritmo ###########
-#1. Variables de valores e importar modulo para escoger una opción random
-#2. Preguntar al usuario su opción
-#3. Escoger de las variables para comparar la opción del; usuario
-#4.1 Para compara poner la opciones en boolean
-#4.2 Comparar la opciones
-#5 Definr ganador
-
 from random import choice
 
 playerWins = False
 draw = False
 
-print('Welcome to rock, paper, scissors game')
+print('\nWelcome to rock, paper, scissors game!')
 
 while True:
 
@@ -19,48 +11,45 @@ while True:
 
     machineSelection = choice(selections)
 
-    option = input('Please select an option... "Rock", "Paper" or "Scissors"...\n')
+    option = input('\nPlease select an option... "Rock", "Paper" or "Scissors"...\n')
 
-    if option.lower() not in selections:
+    if (option.lower() not in selections) and option != '':
         print('invalid selection. Please try again... ')
-        continue
+
+    if option == '':
+        print('Goodbye!\n')
+        break
 
     else:
         option = option.lower()
-    
-        if option == 'rock' and machineSelection == selections[0]:
-            draw = True
-        if option == 'rock' and machineSelection == selections[1]:
-            playerWins = False
-        if option == 'rock' and machineSelection == selections[2]:
-            playerWins = True
         
+        print(f'\nYou have selected {option.upper()}!')
+        print(f'Machine has selected {machineSelection.upper()}!\n')
+
+        if option == machineSelection:
+            draw = True
         if option == 'paper' and machineSelection == selections[0]:
             playerWins = True
-        if option == 'paper' and machineSelection == selections[1]:
-            draw = True
-        if option == 'paper' and machineSelection == selections[2]:
-            playerWins = False
-        
-        if option == 'scissors' and machineSelection == selections[0]:
-            playerWins = False
         if option == 'scissors' and machineSelection == selections[1]:
             playerWins = True
-        if option == 'scissors' and machineSelection == selections[2]:
-            draw = True
+        if option == 'rock' and machineSelection == selections[2]:
+            playerWins = True
+        else:
+            playerWins = False
 
         if draw == True:
             print("It's a tie!")
-        if playerWins == True:
+        elif playerWins == True:
             print('You won!')
         elif playerWins == False:
             print('You lost')
-        break
-    
 
+        playAgain = input('Do you wish to play again?\n')
+        playAgainOptions = ['yeah', 'yes', 'y', 'play']
+        playAgain = playAgain.lower()
 
-
-        
-    
-    
-    
+        if playAgain in playAgainOptions:
+            continue
+        else:
+            print('Goodbye!\n')
+            break
