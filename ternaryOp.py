@@ -1,3 +1,4 @@
+
 ## Son operaciones de if y else en una linea de codigo o en lamb
 
 # x=a>16?true:false
