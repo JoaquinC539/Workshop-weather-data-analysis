@@ -1,4 +1,4 @@
-from math import pi
+from math import pi 
 
 def mi_funcion():
     print('hola desde la funcion')
@@ -9,12 +9,12 @@ subtract = lambda num1, num2: num1 - num2
 multiply = lambda num1, num2: num1 * num2
 get_pi = lambda: pi
 
-get_area = lambda radius: pi * (radius**2)
+get_area = lambda radius: pi * (float(radius)**2)
 
-get_perimeter = lambda radius: 2*pi * radius
+get_perimeter = lambda radius: 2*pi * float(radius) 
 
 def type_operation(choice):
-    if(choice  == 'circle'):
+    if(choice  == 'circulo'):
         print("circle operacion")
         circleOperation()
     else:
@@ -37,6 +37,7 @@ def circleOperation():
         if typeCircleOperation=='perimetro':
             radius = request_value()
             print(get_perimeter(radius))
+            # print(get_pi())
             break
         elif typeCircleOperation=="area":
             radius = request_value()
