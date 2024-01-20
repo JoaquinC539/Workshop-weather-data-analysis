@@ -1,5 +1,5 @@
 import argparse
-from utils.utils import type_operation,mi_funcion
+from utils.utils import type_operation
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description= 'Tomar argumentos y hacer operacion respectivamente'
@@ -11,6 +11,6 @@ if __name__ == '__main__':
         choices = ['simple', 'circulo']
     )
     
+
     args = parser.parse_args()
-    mi_funcion()
     type_operation(args.operacion)
