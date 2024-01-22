@@ -13,4 +13,4 @@ if __name__ == '__main__':
     
 
     args = parser.parse_args()
-    type_operation(args.operacion) ####
+    type_operation(args.operacion) 
