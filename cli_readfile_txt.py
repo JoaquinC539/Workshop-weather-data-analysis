@@ -1,5 +1,5 @@
 import argparse
-from hw_suppDocs.modules_cli import iterate_entry
+from cli_module_readfile import select_option
 
 if __name__ == '__main__':
 
@@ -8,11 +8,12 @@ if __name__ == '__main__':
     )
     try:
         parser.add_argument(
-            '-b', '-begin', metavar = 'begin',
-            required = True, help = 'input an entry to add to a .txt file'
+            '-b', '-begin', metavar = 'beginProgram',
+            required = True, help = 'input an entry to add to a .txt file; options are begin, write and clear'
         )
         args = parser.parse_args()
-        iterate_entry(args.write)
+        select_option(args.b)
+        
 
     except Exception as error:
         print(f"The error was: {error}")
