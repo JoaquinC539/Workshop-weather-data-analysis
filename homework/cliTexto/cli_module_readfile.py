@@ -21,12 +21,14 @@ def add_txt():
     txt_file = open('cli.txt', 'a')
     userInp = input('Add text here...\n')
     txt_file.write(userInp)
+    #Agregar un print que diga que se escribio correctamente
     txt_file.close()
 
 def read_txt():
     txt_file = open('cli.txt', 'r')
     text = txt_file.read()
     print(text)
+    txt_file.close()
 
 def clear_txt():
     if caution_clear() == True:

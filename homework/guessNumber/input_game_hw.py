@@ -90,6 +90,7 @@ def give_hint(machineNum, hintChance):
         else:
             print(f'The first letter of the number is {word[0]}\n')
     if hintChance == 1:
+        ## Aqui hace crash
         print(f'The first digit of the number starts with  "{word[0]}{word[1]}"\n')
     if hintChance <= 0:
         hintChance == 0
