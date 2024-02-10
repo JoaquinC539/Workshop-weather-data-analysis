@@ -6,14 +6,12 @@ def validate_options(choice):
         return True
 
 def caution_clear():
-    clear = False
     while True:
         caution = input('Do you wish to clear this file?\nPress y to confirm, n to cancel\n')
         if caution == 'y':
-            clear = True
-            return clear
+            return True
         else:
-            return clear
+            return False
 
 # __________________________________________________________________________________________________________________________________________________________________________#
 
@@ -21,7 +19,7 @@ def add_txt():
     txt_file = open('cli.txt', 'a')
     userInp = input('Add text here...\n')
     txt_file.write(userInp)
-    #Agregar un print que diga que se escribio correctamente
+    print('File has been updated. Changes are safe...\n')
     txt_file.close()
 
 def read_txt():
@@ -31,19 +29,15 @@ def read_txt():
     txt_file.close()
 
 def clear_txt():
-    if caution_clear() == True:
+    if caution_clear():
         txt_file = open('cli.txt', 'w')
         txt_file.close()
         print('File has been cleared')
-    else:
-        pass
 
 # __________________________________________________________________________________________________________________________________________________________________________#
 
 def select_option(choice):
-    if validate_options(choice) == False:
-        print('Invalid Option')
-    else:
+    if validate_options(choice):
         if choice == 'write':
             add_txt()
         if choice == 'read':
@@ -51,3 +45,5 @@ def select_option(choice):
         if choice == 'clear':
             clear_txt()
         return choice
+    else:
+        print('Invalid Option')
