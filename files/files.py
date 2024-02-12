@@ -52,17 +52,29 @@ x=5
 
 ############## CREATE OPERATION ############
 
-try:
-    # fDiary=path.exists('./daniDiary.txt')
-    if not path.exists('./daniDiary.txt'):
-        fDiary=open('daniDiary.txt', 'x')
-        fDiary.write('Soy el diario')
-        fDiary.close()
-    else:
-        fDiary=open('daniDiary.txt','w')
-        fDiary.write('Ya existe el diario')
-        fDiary.close()
+# try:
+#     # fDiary=path.exists('./daniDiary.txt')
+#     if not path.exists('./daniDiary.txt'):
+#         fDiary=open('daniDiary.txt', 'x')
+#         fDiary.write('Soy el diario')
+#         fDiary.close()
+#     else:
+#         fDiary=open('daniDiary.txt','w')
+#         fDiary.write('Ya existe el diario')
+#         fDiary.close()
    
-except Exception:
-    print(f'Error was: {Exception}')
+# except Exception:
+#     print(f'Error was: {Exception}')
+try:
+#      fDiary=open('daniDiary.txt', 'x')
+#      fDiary.write('Soy el diario')
+#      fDiary.close()
+
+    with open('daniDiary.txt','r') as dD:
+        texto=dD.read()
+        print(texto)
+    print(dD.read())
+                
+except Exception as error:
+    print(f'Error was: {error}')
 

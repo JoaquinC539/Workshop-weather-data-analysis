@@ -1,4 +1,5 @@
 from random import choice
+from pdb import set_trace as bp
 
 playerWins = False
 draw = False
@@ -8,9 +9,9 @@ print('\nWelcome to rock, paper, scissors game!')
 while True:
 
     selections = ["rock","paper","scissors"]
-
+    
     machineSelection = choice(selections)
-
+    # bp()
     option = input('\nPlease select an option... "Rock", "Paper" or "Scissors"...\n')
 
     if (option.lower() not in selections) and option != '':

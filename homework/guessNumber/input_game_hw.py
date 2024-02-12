@@ -14,9 +14,9 @@ def main():
 
     while True:
     
-        if hint <= 0:
-            print('No hints available')
-        else:
+        # if hint <= 0:
+        #     print('No hints available')
+        if hint > 0:
             print(f'Hints available: {hint}')
     # Begin Prompt
         guess = input('Please guess a number between 1 and 50 (blank to exit):\n')
@@ -32,9 +32,9 @@ def main():
                 count += 1
                 numsChosen.append(guess)
                 print('Incorrect Number')
-                print(f'guesses so far: {numsChosen}')
+                print(f'guesses so far: {numsChosen}\n')
                 continue
-        elif guess == 'hint':
+        elif guess == 'hint': ########## HERE ##########
             give_hint(str(machineChoice), hint)
             hint -= 1
         elif guess == '':
@@ -61,26 +61,30 @@ def validate_input(userInput):
         return True
     else:
         return False
-    
-def give_hint(machineNum, hintChance):
+
+def give_num_value(machineNum):
     if machineNum == '1':
-        word = 'one'
+        return 'one'
     elif machineNum == '2':
-        word = 'two'
+        return 'two'
     elif machineNum == '3':
-        word = 'three'
+        return 'three'
     elif machineNum == '4':
-        word = 'four'
+        return 'four'
     elif machineNum == '5':
-        word = 'five'
+        return 'five'
     elif machineNum == '6':
-        word = 'six'
+        return 'six'
     elif machineNum == '7':
-        word = 'seven'
+        return 'seven'
     elif machineNum == '8':
-        word = 'eight'
+        return 'eight'
     elif machineNum == '9':
-        word = 'nine'
+        return 'nine'
+
+
+def give_hint(machineNum, hintChance):
+    
     if hintChance == 3:
         digits = len(machineNum)
         print(f'The number has {str(digits)} digit(s)\n')
@@ -88,9 +92,13 @@ def give_hint(machineNum, hintChance):
         if len(machineNum) == 2:
             print(f'The first digit of the number starts with the letter "{machineNum[0]}"\n')
         else:
+            word = give_num_value(machineNum)
             print(f'The first letter of the number is {word[0]}\n')
     if hintChance == 1:
-        print(f'The first digit of the number starts with  "{word[0]}{word[1]}"\n')
+        x = machineNum[0]
+        word = give_num_value(x)
+        print(f'The first digit of the number starts with  "{word[0]}{word[1]}"\n') 
+
     if hintChance <= 0:
         hintChance == 0
         print('You have no more hints left!\n')
