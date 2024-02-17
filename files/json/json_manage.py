@@ -7,7 +7,9 @@ import os
 import json
 import time
 
+
 pathFile = 'Exam\modules\exam.json'
+
 
 def load_json(pathFile):
     if( os.path.exists(pathFile) ):
@@ -15,7 +17,9 @@ def load_json(pathFile):
             data = json.load(f)
             return data
 
+
 load_json(pathFile)
+
 
 def add_json(pathFile,data):
     with open(pathFile,'w') as f:
