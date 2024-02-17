@@ -22,18 +22,17 @@ ser puesta por default como no completada. En la parte de editar puede recibir s
 - El id no puede ser modificado
 '''
 import argparse
-from Exam.modules.exam_module import operation_type
+from modules.exam_module import operation_type
 
 parser = argparse.ArgumentParser(
     description = 'Begins a Kanban program that will create, write, edit, re-edit and delete boards for organization options are [create, clear, edit, display]'
 )
 
-
 try:
     parser.add_argument(
 
         '-o', '--operation', metavar = 'operation',
-        required = True, help = 'input an entry to a .txt file; options are write, read and clear',
+        required = True, help = 'input an entry to a .json file; options are create, clear, edit and display',
         choices = ['create', 'clear', 'edit', 'display'] 
     )
     args = parser.parse_args()
