@@ -28,8 +28,8 @@ validate_operation = lambda operation: True if operation == 'create' or operatio
 
 ### _____________________________________________________________________________________________________________________________________________________________________ ###
                                                                        # .JSON START-UP #
-#path = 'Exam\modules\exam.json'
-path = 'modules/exam.json'
+path = 'Exam\modules\exam.json'
+#path = 'modules/exam.json'
 
 def load_json():                            ### PULLS JSON DICTIONARY INFORMATION ###
     if os.path.exists(path):
@@ -96,6 +96,7 @@ def create_board():                    ### CREATES A BOARD THAT WILL CALL THE WR
 
     with open(path, 'w') as file:
         json.dump(result, file, indent=2)
+
 
 
 create_board()

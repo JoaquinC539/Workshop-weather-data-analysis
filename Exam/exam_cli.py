@@ -1,4 +1,5 @@
 '''
+
 Examen: Hacer un manejador de tareas usando json, cli, modulos de funciones, funciones, lambdas y funciones integradas de python
 
 - Crear una branch nueva de git para el examen
@@ -20,7 +21,27 @@ ser puesta por default como no completada. En la parte de editar puede recibir s
 - El id debe ser generado automaticamente cuando se agregue una tarea, el id debe ser unico por tarea y no repetible
 
 - El id no puede ser modificado
+
+- CALIFICACION:
+
+Uso de git: 3/5
+
+Uso de kanban: 0/5
+
+Limpieza de codigo: 8/10
+
+Atrapo de errores y exepciones: 5/15
+
+Validaciones de entradas/casos: 10/10
+
+Uso de lambdas y funciones de grado superior (filter):  6/10
+
+Funcionalidad correcta del programa: 0/45
+
+FINAL: 32/100 Beso doble en la frente
+
 '''
+
 import argparse
 from modules.exam_module import operation_type
 
