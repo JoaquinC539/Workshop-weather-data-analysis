@@ -6,12 +6,19 @@ from pprint import pprint
 import os
 import json
 import time
+
+
+pathFile = 'Exam\modules\exam.json'
+
+
 def load_json(pathFile):
     if( os.path.exists(pathFile) ):
         with open(pathFile, 'r') as f:
             data = json.load(f)
             return data
 
+
+load_json(pathFile)
 
 
 def add_json(pathFile,data):
