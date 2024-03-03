@@ -1,5 +1,5 @@
 import argparse
-from Exam2.module_folder.exam2_module import main
+from module_folder.exam2_module import main
 
 def display_commands():
     choices=['Create', 'Edit', 'Display', 'Select', 'Delete', 'Status']
