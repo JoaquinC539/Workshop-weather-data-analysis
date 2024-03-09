@@ -2,21 +2,19 @@
 import os
 import json
 
-# __________________________________________________________ GLOBALS ____________________________________________________________ #
+# __________________________________________________________ GLOBALS ____________________________________________________________#
 
-pathFile = './tasks.json'
+# pathFile = './tasks'
 
-numerical_id = 1
+# ____________________________________________________________ MAIN _____________________________________________________________#
 
-# ____________________________________________________________ MAIN ____________________________________________________________ #
-
-def validate_path_format(input_path):
+def validate_path_format(input_path,pathFile):
 
     if not isinstance(input_path, str):
         print("Error: Input should be a string representing a path.")
         return False
     
-    path = os.path.normpath(input_path)
+    path = os.path.normpath(input_path,)
     if os.path.isabs(path):
         return True
     
@@ -25,28 +23,28 @@ def validate_path_format(input_path):
 
     return False
 
-def command_selection(choice):
+def command_selection(choice,pathFile):
     choice = choice.strip().lower()
     if validate_choice(choice):
         if choice == 'create':
-            create_task()
+            create_task(pathFile)
         elif choice == 'display':
-            display_tasks()
+            display_tasks(pathFile)
         elif choice == 'select':
-            select_task()
+            select_task(pathFile)
         elif choice == 'edit':
-            edit_task()
+            edit_task(pathFile)
         elif choice == 'delete':
-            delete_task()
+            delete_task(pathFile)
         elif choice == 'status':
-            change_status()
+            change_status(pathFile)
 
-def main(choice):
-    command_selection(choice)
+def main(choice, pathFile):
+    command_selection(choice,pathFile )
 
 # _____________________________________________________ JSON / Utility _____________________________________________________ #
 
-def load_json():
+def load_json(pathFile):
     try:
         if os.path.exists(pathFile):
             with open(pathFile,"r") as file:
@@ -89,9 +87,7 @@ def caution_delete():
 
 # _____________________________________________________ COMMAND FUNCTIONS _____________________________________________________ #
 
-def create_task():
-    # global numerical_id
-
+def create_task(pathFile):
     try:
 
         if not os.path.exists(pathFile):
@@ -104,6 +100,7 @@ def create_task():
                             'completion': False
                             }
                     initialize_arrray['tasks'] = [task]
+                    initialize_arrray["id_count"]=1
                     json.dump(initialize_arrray, file, indent=2)
                     print('Task added\n')
                     
@@ -112,17 +109,18 @@ def create_task():
                     print('Action canceled.\n')
 
         else:
-            data = load_json()
+            data = load_json(pathFile)
             if data == None:
                 data = {'tasks':[]}
-            description = prompt_entry()
+            description = prompt_entry()            
             if description:
-                task = {'id': len(data['tasks']) + 1,#numerical_id,
+                id = data['id_count'] + 1
+                task = {'id': id,#numerical_id,
                             'description': description,
                             'completion': False
                             }
                 data['tasks'].append(task)
-                #data[id_count]+=int(data[id_count])+1
+                data["id_count"] = id                
                 with open (pathFile, 'w') as file:
                     json.dump(data, file, indent=2)
                 print('Task added\n')
@@ -134,9 +132,9 @@ def create_task():
     except Exception as error:
         print(f'Error ocurred when creating a task: {error}')
 
-def display_tasks():
+def display_tasks(pathFile):
     try:
-        data = load_json()
+        data = load_json(pathFile)
         if data != None:
             for i in range(len(data['tasks'])):
                 values = list((data['tasks'][i]).values())
@@ -153,8 +151,8 @@ def display_tasks():
     except Exception:
         print(f'Cannot display information on a non-existent file. Please create a task beforehand.\n')
 
-def select_task():
-    data = load_json()
+def select_task(pathFile):
+    data = load_json(pathFile)
     try:
 
         if (data != None) or (os.path.exists(pathFile)):
@@ -224,10 +222,10 @@ def select_task():
     except Exception as error:
         print(f'Error occured when selecting a task... Error: {error}')
 
-def delete_task():
+def delete_task(pathFile):
     try:
         count = 0
-        data = load_json()
+        data = load_json(pathFile)
         id_selection = input('Select a task by numerical id to delete:\n')
         if input_isinteger(id_selection):
 
@@ -255,10 +253,10 @@ def delete_task():
     except Exception as error:
         print(f'There was an error when deleting a task. Error: {error}')
 
-def edit_task():
+def edit_task(pathFile):
     try:
         count = 0
-        data = load_json()
+        data = load_json(pathFile)
         id_selection = input('Select a task by numerical id to edit:\n')
         if input_isinteger(id_selection):
             id_selection = int(id_selection)
@@ -285,10 +283,10 @@ def edit_task():
     except Exception as error:
         print(f'There was an error when editing a task: {error}')
 
-def change_status():
+def change_status(pathFile):
     try:
         count = 0
-        data = load_json()
+        data = load_json(pathFile)
         id_selection = input('Select a task by numerical id to change task status:\n')
         if input_isinteger(id_selection):
             id_selection = int(id_selection)

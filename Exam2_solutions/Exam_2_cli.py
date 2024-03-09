@@ -2,7 +2,8 @@
 
 
 import argparse
-from module_folder.exam2_module import main
+from module_folder.exam_2_module import main
+from module_folder.config import config
 
 def display_commands():
     choices=['Create', 'Edit', 'Display', 'Select', 'Delete', 'Status']
@@ -31,7 +32,8 @@ parser.add_argument(
 
 args = parser.parse_args()
 try:
-    main(args.choice)
+    path_file=config()
+    main(args.operation,path_file)
 except Exception as error:
     print(f'The program had an error: {error}\n')
 finally:
