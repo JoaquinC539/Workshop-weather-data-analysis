@@ -1,4 +1,5 @@
 '''
+
 Examen: Hacer un manejador de tareas usando json, cli, modulos de funciones, funciones, lambdas y funciones integradas de python
 
 - Crear una branch nueva de git para el examen
@@ -20,20 +21,39 @@ ser puesta por default como no completada. En la parte de editar puede recibir s
 - El id debe ser generado automaticamente cuando se agregue una tarea, el id debe ser unico por tarea y no repetible
 
 - El id no puede ser modificado
+
+- CALIFICACION:
+
+Uso de git: 3/5
+
+Uso de kanban: 0/5
+
+Limpieza de codigo: 8/10
+
+Atrapo de errores y exepciones: 5/15
+
+Validaciones de entradas/casos: 10/10
+
+Uso de lambdas y funciones de grado superior (filter):  6/10
+
+Funcionalidad correcta del programa: 0/45
+
+FINAL: 32/100 Beso doble en la frente
+
 '''
+
 import argparse
-from Exam.modules.exam_module import operation_type
+from modules.exam_module import operation_type
 
 parser = argparse.ArgumentParser(
     description = 'Begins a Kanban program that will create, write, edit, re-edit and delete boards for organization options are [create, clear, edit, display]'
 )
 
-
 try:
     parser.add_argument(
 
         '-o', '--operation', metavar = 'operation',
-        required = True, help = 'input an entry to a .txt file; options are write, read and clear',
+        required = True, help = 'input an entry to a .json file; options are create, clear, edit and display',
         choices = ['create', 'clear', 'edit', 'display'] 
     )
     args = parser.parse_args()
