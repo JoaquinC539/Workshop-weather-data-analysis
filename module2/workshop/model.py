@@ -1,4 +1,3 @@
-from datascience import *
 
 """
 The game state and logic (model component) of 512, 
@@ -27,7 +26,7 @@ class Vec():
     Thus we can add two Vecs to get a Vec.
     """
     #Fixme:  We need a constructor, and __add__ method, and __eq__.
-
+    
     def __init__(self, row, column) -> None:
         self.x = row
         self.y = column
@@ -147,6 +146,52 @@ class Board(GameElement):
         """Is position (pos.x, pos.y) a legal position on the board?"""
         return (pos.x >= 0 and pos.x < len(self.tiles[0])) and (pos.y >= 0 and pos.y < len(self.tiles))
     
+    def slide(self, pos: Vec,  dir: Vec)->None:
+        """Slide tile at pos.x, pos.y (if any)
+        in direction (dir.x, dir.y) until it bumps into
+        another tile or the edge of the board.
+        """
+        if self[pos] is None:
+            return
+        while True:
+            new_pos = pos + dir
+            if not self.in_bounds(new_pos):
+                break
+            if self[new_pos] is None:
+                self._move_tile(pos, new_pos)
+            elif self[pos] == self[new_pos]:
+                self[pos].merge(self[new_pos])
+                self._move_tile(pos, new_pos)
+                break  # Stop moving when we merge with another tile
+            else:
+                # Stuck against another tile
+                break
+            pos = new_pos
+
+    def _move_tile(self, old_pos: Vec, new_pos: Vec)->None:
+        # You write this
+        if(self.tiles[old_pos.x][old_pos.y] is None):
+            return
+        
+        tile:Tile = self.tiles[old_pos.x][old_pos.y]
+        valueTile = tile.value
+        self.tiles[old_pos.x][old_pos.y] = None
+        newTile:Tile = Tile(new_pos,valueTile)
+        self.tiles[new_pos.x][new_pos.y] = newTile
+        return
+
+    def right(self):
+        
+        pass
+
+    def left(self):
+        pass
+
+    def down(self):
+        pass
+    
+    def up(self):
+        pass
     def score(self) -> int:
         """Calculate a score from the board.
         (Differs from classic 1024, which calculates score
@@ -156,21 +201,84 @@ class Board(GameElement):
         return 0
         #FIXME
 
-class TestBoundsCheck(unittest.TestCase):
+class TestSlide(unittest.TestCase):
 
-    def test_bounds_default_shape(self):
-        board = model.Board(4,4)
-        self.assertTrue(board.in_bounds(Vec(0,0)))
-        self.assertTrue(board.in_bounds(Vec(3,3)))
-        self.assertTrue(board.in_bounds(Vec(1,2)))
-        self.assertTrue(board.in_bounds(Vec(0,3)))
-        self.assertFalse(board.in_bounds(Vec(-1,0))) # off the top
-        self.assertFalse(board.in_bounds(Vec(1,-1))) # off the left
-        self.assertFalse(board.in_bounds(Vec(4,3)))  # off the bottom
-        self.assertFalse(board.in_bounds(Vec(1,4)))  # off the right
+    def test_slide_left_to_edge(self):
+        """A tile should stop just when it reaches the edge"""
+        board = model.Board()
+        board.from_list([[0, 0, 0, 0],
+                         [0, 0, 2, 0],
+                         [0, 0, 0, 0],
+                         [0, 0, 0, 0]])
+        board.slide(Vec(1, 2), Vec(0, -1))  # Slide the 2 left
+        self.assertEqual(board.to_list(),
+                         [[0, 0, 0, 0],
+                          [2, 0, 0, 0],
+                          [0, 0, 0, 0],
+                          [0, 0, 0, 0]])
 
-TestBoundsCheck().test_bounds_default_shape()
+    def test_slide_right_to_edge(self):
+        """A tile should stop just when it reaches the edge"""
+        board = model.Board()
+        board.from_list([[0, 0, 0, 0],
+                         [0, 0, 2, 0],
+                         [0, 0, 0, 0],
+                         [0, 0, 0, 0]])
+        board.slide(Vec(1, 2), Vec(0, 1))  # Slide the 2 right
+        self.assertEqual(board.to_list(),
+                         [[0, 0, 0, 0],
+                          [0, 0, 0, 2],
+                          [0, 0, 0, 0],
+                          [0, 0, 0, 0]])
 
+    def test_slide_already_at_edge(self):
+        """A tile already at the edge can't slide farther that way"""
+        board = model.Board()
+        board.from_list([[0, 0, 0, 0],
+                         [0, 0, 0, 4],
+                         [0, 0, 0, 0],
+                         [0, 0, 0, 0]])
+        board.slide(Vec(1, 3), Vec(0, 1))  # To the right
+        self.assertEqual(board.to_list(),
+                         [[0, 0, 0, 0],
+                          [0, 0, 0, 4],
+                          [0, 0, 0, 0],
+                          [0, 0, 0, 0]])
+
+    def test_empty_wont_slide(self):
+        """Sliding an empty position has no effect"""
+        board = model.Board()
+        board.from_list([[2, 0, 0, 0],
+                         [0, 2, 0, 0],
+                         [0, 0, 2, 0],
+                         [0, 0, 0, 2]])
+        board.slide(Vec(1, 0), Vec(0, 1))  # Space 1,0 is empty
+        self.assertEqual(board.to_list(),
+                         [[2, 0, 0, 0],
+                          [0, 2, 0, 0],
+                          [0, 0, 2, 0],
+                          [0, 0, 0, 2]])
+
+    def test_slide_into_obstacle(self):
+        """A tile should stop when it reaches another tile"""
+        board = model.Board()
+        board.from_list([[2, 0, 0, 0],
+                         [0, 2, 4, 0],
+                         [0, 0, 2, 0],
+                         [0, 0, 0, 2]])
+        board.slide(Vec(1, 1), Vec(0, 1))  # Space 1,0 is empty
+        self.assertEqual(board.to_list(),
+                         [[2, 0, 0, 0],
+                          [0, 2, 4, 0],
+                          [0, 0, 2, 0],
+                          [0, 0, 0, 2]])
+    
+
+TestSlide().test_empty_wont_slide()
+TestSlide().test_slide_already_at_edge()
+TestSlide().test_slide_into_obstacle()
+TestSlide().test_slide_left_to_edge()
+TestSlide().test_slide_right_to_edge()
 
 
 # print(Board(4,5).place_tile())
