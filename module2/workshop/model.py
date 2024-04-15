@@ -286,7 +286,7 @@ print(TestScaffolding().test_to_from_list())
 # board2=board.from_list(y)
 # print(board2)
 # print(type(board2.to_list()))
-
+#dfdf
 # class TestBoundsCheck(unittest.TestCase):
 
 #     def test_bounds_default_shape(self):
