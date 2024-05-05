@@ -1,4 +1,6 @@
 class Resta:
+    x:int=10    
+    t:int
     
     def __init__(self) -> None:
         pass
@@ -6,7 +8,7 @@ class Resta:
     def llamado_resta(self,a:int,b:int)->int:
         return self.resta(a,b)
     @classmethod
-    def resta(cls,a:int,b:int)->int:
+    def resta(cls, a:int, b:int)->int:
         print(cls.resta_cuadrada(100,1))
         return a-b
     
@@ -18,5 +20,8 @@ class Resta:
     
     
     
-resta:Resta=Resta()
+resta:Resta = Resta()
 print(Resta.resta(10,5))
+
+print(Resta.x)
+#print(Resta.t) #Error al estar indefinido

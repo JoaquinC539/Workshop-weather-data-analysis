@@ -4,9 +4,13 @@ class Vehicle:
     license:bool
     
     def __init__(self,color:str,year:int,license:bool) -> None:
-        self.color=color
-        self.year=year
-        self.license=license
+        self.color = color
+        self.year = year
+        self.license = license
+        
+    def __str__(self) -> str:
+        return f'{self.color} {self.year} {self.license}'
+        
         
     def set_color(self,color:str)->None:
         self.color=color
