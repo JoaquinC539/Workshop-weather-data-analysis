@@ -1,0 +1,60 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.header{
+    color: aqua;
+    
+}
+#titulo_grande{
+    color: blueviolet;
+}
+.div_general{
+    background-color: #F89681;
+}
+#links{
+    color: aquamarine;
+}
+.imagen{
+    width: 300px;
+    height: 350px;
+    border-radius: 100%;
+
+}
+#en_linea{
+    display: flex;
+}
+.mi_boton{
+    width: 70px;
+    height: 30px;
+    padding: 5px;
+    margin: 2px;
+    margin-top: 8px;
+}
+.cuadrado{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    animation-name: cuadrado;
+    animation-duration: 10s;
+}
+.mi_boton:hover{
+    background-color: rgb(158, 38, 79);
+    color: whitesmoke;
+}
+@keyframes cuadrado{
+    from {background-color: red;}
+    to {background-color: yellow;}
+    to {background-color: aqua;}
+}
+@media only screen and (max-width:400px) {
+    
+    .img_container{
+        display: flex;
+        justify-content: center;
+    }
+    .imagen{
+        width: 150px;
+        height: 200px;
+        border-radius: 0%;       
+    }
+}
