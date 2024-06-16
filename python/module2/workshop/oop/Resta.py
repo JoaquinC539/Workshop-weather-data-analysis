@@ -12,8 +12,8 @@ class Resta:
         print(cls.resta_cuadrada(100,1))
         return a-b
     
-    @classmethod
-    def resta_cuadrada(cls,a:int,b:int)->int:
+    @staticmethod
+    def resta_cuadrada(a:int,b:int)->int:
         a=a*a
         b=b*b
         return a-b
