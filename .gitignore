@@ -24,6 +24,7 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+nginx-1.24.0.zip
 MANIFEST
 
 # PyInstaller
